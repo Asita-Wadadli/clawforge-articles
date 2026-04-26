@@ -430,7 +430,7 @@ export default function Home({ articles }) {
 
                     {/* Expanded Content */}
                     {isExpanded && (
-                      <div className="px-4 sm:px-6 pb-4 sm:pb-6 border-t border-gray-100 dark:border-gray-700">
+                      <div className="px-4 sm:px-6 pb-4 sm:pb-6 border-t border-gray-100 dark:border-gray-700 bg-gray-50/80 dark:bg-gray-700/30">
                         <div 
                           className="prose prose-sm sm:prose-base dark:prose-invert max-w-none py-4 prose-headings:font-bold prose-h2:text-blue-600 dark:prose-h2:text-blue-400 prose-a:text-blue-600 dark:prose-a:text-blue-400"
                           dangerouslySetInnerHTML={{ __html: article.fullContent }}
@@ -479,7 +479,7 @@ export default function Home({ articles }) {
                       </div>
                     )}
 
-                    {/* Read More Button (when collapsed) - SMALLER */}
+                    {/* Read More Button (when collapsed) - SMALLER WITH COLOR */}
                     {!isExpanded && (
                       <div className="px-4 sm:px-6 pb-4">
                         <button
@@ -487,9 +487,9 @@ export default function Home({ articles }) {
                             e.stopPropagation();
                             toggleArticle(article.id);
                           }}
-                          className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
+                          className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-full hover:from-blue-700 hover:to-purple-700 transition-all shadow-sm"
                         >
-                          Read article
+                          Read
                           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                           </svg>
