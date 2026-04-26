@@ -24,8 +24,7 @@ export async function getStaticProps({ params }) {
     .slice(0, 3);
     
   return {
-    props: { article, relatedArticles },
-    revalidate: 60
+    props: { article, relatedArticles }
   };
 }
 
