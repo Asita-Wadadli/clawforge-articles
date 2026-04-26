@@ -239,20 +239,25 @@ export default function ArticlePage({ article, relatedArticles }) {
           <button 
             onClick={() => setMenuOpen(!menuOpen)}
             style={{
-              width: '40px',
-              height: '40px',
+              width: '44px',
+              height: '44px',
               background: 'linear-gradient(135deg, #2563eb, #9333ea)',
               border: 'none',
               borderRadius: '8px',
               color: 'white',
-              fontSize: '20px',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              padding: '0'
             }}
+            aria-label="Menu"
           >
-            ☰
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
           </button>
         </nav>
 
