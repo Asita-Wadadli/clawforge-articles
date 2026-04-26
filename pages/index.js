@@ -3,13 +3,18 @@ import { useState, useEffect } from 'react';
 import ArticleCard from '../components/ArticleCard';
 import { fetchArticles } from '../lib/api';
 
-export default function Home() {
-  const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(true);
+export async function getStaticProps() {
+  const articles = await fetchArticles();
+  return {
+    props: { articles },
+    revalidate: 60 // Revalidate every minute
+  };
+}
+
+export default function Home({ articles }) {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    // Check for saved theme preference
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
@@ -17,20 +22,6 @@ export default function Home() {
       setDarkMode(true);
       document.documentElement.classList.add('dark');
     }
-
-    // Fetch articles
-    const loadArticles = async () => {
-      try {
-        const data = await fetchArticles();
-        setArticles(data);
-      } catch (error) {
-        console.error('Failed to load articles:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadArticles();
   }, []);
 
   const toggleTheme = () => {
@@ -53,11 +44,11 @@ export default function Home() {
         <meta property="og:title" content="ClawForge | Insights & Articles" />
         <meta property="og:description" content="Discover cutting-edge insights on automation, AI, and digital transformation." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://hemisphere-claw-agency.vercel.app" />
+        <meta property="og:url" content="https://clawforge-article-site.vercel.app" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="ClawForge | Insights & Articles" />
         <meta name="twitter:description" content="Discover cutting-edge insights on automation, AI, and digital transformation." />
-        <link rel="canonical" href="https://hemisphere-claw-agency.vercel.app" />
+        <link rel="canonical" href="https://clawforge-article-site.vercel.app" />
       </Head>
 
       <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
@@ -74,8 +65,7 @@ export default function Home() {
 
               <nav className="hidden md:flex items-center space-x-8">
                 <a href="/" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Articles</a>
-                <a href="#about" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</a>
-                <a href="#contact" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</a>
+                <a href="https://hemisphere-claw-agency.vercel.app" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home</a>
               </nav>
 
               <button
@@ -132,18 +122,9 @@ export default function Home() {
               </span>
             </div>
 
-            {loading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {[...Array(6)].map((_, i) => (
-                  <div key={i} className="bg-white dark:bg-gray-800 rounded-xl shadow-sm animate-pulse">
-                    <div className="h-48 bg-gray-200 dark:bg-gray-700 rounded-t-xl" />
-                    <div className="p-6 space-y-4">
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/4" />
-                      <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded" />
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4" />
-                    </div>
-                  </div>
-                ))}
+            {articles.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-gray-500 dark:text-gray-400">No articles found. Check back soon!</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -155,68 +136,19 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Newsletter Section */}
-        <section className="py-16">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 md:p-12 text-center">
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Stay Ahead of the Curve
-              </h2>
-              <p className="text-blue-100 mb-8 max-w-xl mx-auto">
-                Get the latest insights on automation and AI delivered straight to your inbox.
-              </p>
-              <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white"
-                />
-                <button
-                  type="submit"
-                  className="px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors"
-                >
-                  Subscribe
-                </button>
-              </form>
-            </div>
-          </div>
-        </section>
-
         {/* Footer */}
         <footer className="bg-gray-900 text-gray-400 py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-              <div className="col-span-1 md:col-span-2">
-                <div className="flex items-center space-x-2 mb-4">
-                  <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">CF</span>
-                  </div>
-                  <span className="text-xl font-bold text-white">ClawForge</span>
+            <div className="flex flex-col md:flex-row items-center justify-between">
+              <div className="flex items-center space-x-2 mb-4 md:mb-0">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">CF</span>
                 </div>
-                <p className="text-sm max-w-sm">
-                  Building a more efficient future through automation and AI. 
-                  Empowering businesses to scale smarter.
-                </p>
+                <span className="text-xl font-bold text-white">ClawForge</span>
               </div>
-              <div>
-                <h3 className="text-white font-semibold mb-4">Quick Links</h3>
-                <ul className="space-y-2 text-sm">
-                  <li><a href="/" className="hover:text-white transition-colors">Articles</a></li>
-                  <li><a href="#about" className="hover:text-white transition-colors">About</a></li>
-                  <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-white font-semibold mb-4">Connect</h3>
-                <ul className="space-y-2 text-sm">
-                  <li><a href="#" className="hover:text-white transition-colors">Twitter</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">LinkedIn</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">GitHub</a></li>
-                </ul>
-              </div>
-            </div>
-            <div className="border-t border-gray-800 pt-8 text-sm text-center">
-              © {new Date().getFullYear()} ClawForge. All rights reserved.
+              <p className="text-sm">
+                © {new Date().getFullYear()} ClawForge Systems. All rights reserved.
+              </p>
             </div>
           </div>
         </footer>
