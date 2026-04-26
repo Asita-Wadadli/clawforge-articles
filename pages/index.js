@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
-import ArticleCard from '../components/ArticleCard';
 import { fetchArticles } from '../lib/api';
 
 export async function getStaticProps() {
@@ -13,6 +12,7 @@ export async function getStaticProps() {
 export default function Home({ articles }) {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expandedArticle, setExpandedArticle] = useState(null);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -32,6 +32,17 @@ export default function Home({ articles }) {
     } else {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
+    }
+  };
+
+  const toggleArticle = (id) => {
+    if (expandedArticle === id) {
+      setExpandedArticle(null);
+      // Scroll back to article position
+      const element = document.getElementById(`article-${id}`);
+      if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      setExpandedArticle(id);
     }
   };
 
@@ -129,13 +140,90 @@ export default function Home({ articles }) {
           </header>
 
           {/* Articles List */}
-          <div className="divide-y divide-gray-100 dark:divide-gray-800">
+          <div className="space-y-4">
             {articles.length === 0 ? (
               <p className="py-8 text-gray-500 dark:text-gray-500">No articles yet. Check back soon.</p>
             ) : (
-              articles.map((article) => (
-                <ArticleCard key={article.id} article={article} />
-              ))
+              articles.map((article) => {
+                const isExpanded = expandedArticle === article.id;
+                const formattedDate = new Date(article.publishedAt).toLocaleDateString('en-US', {
+                  month: 'short',
+                  day: 'numeric',
+                  year: 'numeric'
+                });
+
+                return (
+                  <article 
+                    key={article.id} 
+                    id={`article-${article.id}`}
+                    className="border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden bg-white dark:bg-gray-900"
+                  >
+                    {/* Article Header - Always Visible */}
+                    <div 
+                      className="p-4 sm:p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
+                      onClick={() => toggleArticle(article.id)}
+                    >
+                      <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2 leading-snug">
+                        {article.title}
+                      </h2>
+                      
+                      {!isExpanded && (
+                        <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-3">
+                          {article.excerpt}
+                        </p>
+                      )}
+                      
+                      <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-500">
+                        <span>{formattedDate}</span>
+                        <span>·</span>
+                        <span>{article.readTime} min read</span>
+                        {article.category && (
+                          <>
+                            <span>·</span>
+                            <span className="text-blue-600 dark:text-blue-400">{article.category}</span>
+                          </>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Expanded Content */}
+                    {isExpanded && (
+                      <div className="px-4 sm:px-6 pb-4 sm:pb-6 border-t border-gray-100 dark:border-gray-800">
+                        <div 
+                          className="prose prose-sm sm:prose dark:prose-invert max-w-none py-4 prose-headings:font-semibold prose-a:text-blue-600 dark:prose-a:text-blue-400"
+                          dangerouslySetInnerHTML={{ __html: article.content || article.excerpt }}
+                        />
+                        
+                        {/* Close Button */}
+                        <button
+                          onClick={() => toggleArticle(article.id)}
+                          className="mt-4 inline-flex items-center gap-1 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm font-medium"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                          </svg>
+                          Close
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Read More Button (when collapsed) */}
+                    {!isExpanded && (
+                      <div className="px-4 sm:px-6 pb-4">
+                        <button
+                          onClick={() => toggleArticle(article.id)}
+                          className="inline-flex items-center gap-1 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
+                        >
+                          Read more
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </button>
+                      </div>
+                    )}
+                  </article>
+                );
+              })
             )}
           </div>
         </main>
