@@ -190,140 +190,140 @@ export default function ArticlePage({ article, relatedArticles }) {
       </Head>
 
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-        {/* Navigation - Fixed Mobile */}
-        <nav className="border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md z-50 shadow-sm">
-          <div className="max-w-3xl mx-auto px-4 h-14 flex items-center justify-between">
-            <a href="https://hemisphere-claw-agency.vercel.app" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center shadow-lg">
-                <span className="text-white text-sm font-bold">C</span>
+        {/* Navigation */}
+        <nav className="border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-900 z-50 shadow-sm" style={{ position: 'fixed', width: '100%', top: 0 }}>
+          <div className="max-w-3xl mx-auto px-4" style={{ height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            {/* Logo */}
+            <a href="https://hemisphere-claw-agency.vercel.app" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
+              <div style={{ width: '32px', height: '32px', background: 'linear-gradient(135deg, #2563eb, #9333ea)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span style={{ color: 'white', fontSize: '14px', fontWeight: 'bold' }}>C</span>
               </div>
-              <span className="font-bold text-gray-900 dark:text-white">ClawForge</span>
+              <span style={{ fontWeight: 'bold', color: 'inherit' }}>ClawForge</span>
             </a>
             
             {/* Desktop Nav */}
-            <div className="hidden sm:flex items-center gap-6">
-              <a href="/" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Blog</a>
-              <a href="https://hemisphere-claw-agency.vercel.app" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home</a>
+            <div className="hidden sm:flex" style={{ alignItems: 'center', gap: '24px' }}>
+              <a href="/" style={{ fontSize: '14px', color: '#6b7280', textDecoration: 'none' }}>Blog</a>
+              <a href="https://hemisphere-claw-agency.vercel.app" style={{ fontSize: '14px', color: '#6b7280', textDecoration: 'none' }}>Home</a>
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                style={{ padding: '8px', borderRadius: '8px', background: '#f3f4f6', border: 'none', cursor: 'pointer' }}
                 aria-label="Toggle theme"
               >
-                {darkMode ? (
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                ) : (
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                  </svg>
-                )}
+                {darkMode ? '☀️' : '🌙'}
               </button>
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="flex sm:hidden items-center gap-2">
+            {/* Mobile Menu Button - ALWAYS VISIBLE ON MOBILE */}
+            <div className="sm:hidden" style={{ display: 'flex', alignItems: 'center' }}>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
-                aria-label="Toggle menu"
+                style={{ 
+                  padding: '10px', 
+                  borderRadius: '8px', 
+                  background: 'linear-gradient(135deg, #2563eb, #9333ea)', 
+                  color: 'white',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '18px'
+                }}
+                aria-label="Menu"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
+                ☰
               </button>
             </div>
           </div>
 
-          {/* Mobile Menu */}
+          {/* Mobile Menu Dropdown */}
           {mobileMenuOpen && (
-            <div className="sm:hidden border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
-              <div className="px-4 py-3 space-y-1">
-                <a href="/" className="block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg">Blog</a>
-                <a href="https://hemisphere-claw-agency.vercel.app" className="block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg">Home</a>
+            <div className="sm:hidden" style={{ borderTop: '1px solid #e5e7eb', background: 'white', padding: '16px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <a href="/" style={{ padding: '12px', color: '#374151', textDecoration: 'none', borderRadius: '6px' }} onClick={() => setMobileMenuOpen(false)}>Blog</a>
+                <a href="https://hemisphere-claw-agency.vercel.app" style={{ padding: '12px', color: '#374151', textDecoration: 'none', borderRadius: '6px' }} onClick={() => setMobileMenuOpen(false)}>Home</a>
+                <button
+                  onClick={() => { toggleTheme(); setMobileMenuOpen(false); }}
+                  style={{ padding: '12px', textAlign: 'left', background: 'none', border: 'none', cursor: 'pointer', color: '#374151' }}
+                >
+                  {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+                </button>
               </div>
             </div>
           )}
         </nav>
 
+        {/* Spacer for fixed nav */}
+        <div style={{ height: '56px' }}></div>
+
         {/* Article */}
-        <article className="max-w-3xl mx-auto px-4 py-8 sm:py-12">
+        <article className="max-w-3xl mx-auto px-4 py-8">
           {/* Back Link */}
-          <a href="/" className="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 mb-6 transition-colors">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to blog
+          <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '14px', color: '#6b7280', textDecoration: 'none', marginBottom: '24px' }}>
+            ← Back to blog
           </a>
 
           {/* Header */}
-          <header className="mb-8">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+          <header style={{ marginBottom: '32px' }}>
+            <h1 style={{ fontSize: '28px', fontWeight: 'bold', color: 'inherit', marginBottom: '16px', lineHeight: 1.3 }}>
               {article.title}
             </h1>
             
-            <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px', fontSize: '14px', color: '#6b7280' }}>
               <span>{formattedDate}</span>
               <span>·</span>
               <span>{article.readTime} min read</span>
               {article.category && (
                 <>
                   <span>·</span>
-                  <span className="text-blue-600 dark:text-blue-400 font-medium">{article.category}</span>
+                  <span style={{ color: '#2563eb' }}>{article.category}</span>
                 </>
               )}
             </div>
           </header>
 
           {/* Content */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 sm:p-8">
+          <div style={{ background: 'white', borderRadius: '12px', padding: '24px', marginBottom: '24px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
             <div 
-              className="prose prose-base dark:prose-invert max-w-none prose-headings:font-bold prose-h2:text-blue-600 dark:prose-h2:text-blue-400 prose-a:text-blue-600 dark:prose-a:text-blue-400"
+              style={{ lineHeight: 1.7 }}
               dangerouslySetInnerHTML={{ __html: article.fullContent }}
             />
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap gap-3 mt-8">
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
             <button
               onClick={downloadPDF}
               disabled={pdfLoading}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 transition-all text-sm font-semibold shadow-md"
+              style={{ 
+                padding: '12px 24px', 
+                background: 'linear-gradient(135deg, #2563eb, #9333ea)', 
+                color: 'white', 
+                border: 'none', 
+                borderRadius: '8px', 
+                cursor: pdfLoading ? 'not-allowed' : 'pointer',
+                opacity: pdfLoading ? 0.7 : 1,
+                fontSize: '14px',
+                fontWeight: '600'
+              }}
             >
-              {pdfLoading ? (
-                <>
-                  <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Opening...
-                </>
-              ) : (
-                <>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  Download PDF
-                </>
-              )}
+              {pdfLoading ? 'Opening...' : 'Download PDF'}
             </button>
           </div>
         </article>
 
         {/* Related Articles */}
         {relatedArticles.length > 0 && (
-          <section className="border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-            <div className="max-w-3xl mx-auto px-4 py-8 sm:py-12">
-              <h2 className="text-lg font-bold mb-6">More articles</h2>
-              <div className="space-y-4">
+          <section style={{ borderTop: '1px solid #e5e7eb', background: 'white', marginTop: '48px' }}>
+            <div className="max-w-3xl mx-auto px-4 py-8">
+              <h2 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '24px' }}>More articles</h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 {relatedArticles.map(related => (
                   <a 
                     key={related.id}
                     href={`/article/${related.slug}/`}
-                    className="block p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    style={{ padding: '16px', background: '#f9fafb', borderRadius: '8px', textDecoration: 'none', color: 'inherit' }}
                   >
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-1">{related.title}</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">{related.excerpt}</p>
+                    <h3 style={{ fontWeight: '600', marginBottom: '4px' }}>{related.title}</h3>
+                    <p style={{ fontSize: '14px', color: '#6b7280' }}>{related.excerpt}</p>
                   </a>
                 ))}
               </div>
@@ -332,16 +332,16 @@ export default function ArticlePage({ article, relatedArticles }) {
         )}
 
         {/* Footer */}
-        <footer className="border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+        <footer style={{ borderTop: '1px solid #e5e7eb', background: 'white', marginTop: '48px' }}>
           <div className="max-w-3xl mx-auto px-4 py-8">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500 dark:text-gray-400">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-gradient-to-br from-blue-600 to-purple-600 rounded flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">C</span>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', fontSize: '14px', color: '#6b7280' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ width: '24px', height: '24px', background: 'linear-gradient(135deg, #2563eb, #9333ea)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ color: 'white', fontSize: '12px', fontWeight: 'bold' }}>C</span>
                 </div>
-                <span className="font-semibold text-gray-900 dark:text-white">ClawForge</span>
+                <span style={{ fontWeight: '600', color: 'inherit' }}>ClawForge</span>
               </div>
-              <a href="https://hemisphere-claw-agency.vercel.app" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Website</a>
+              <p>© {new Date().getFullYear()} ClawForge Systems</p>
             </div>
           </div>
         </footer>
