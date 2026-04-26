@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "outputDirectory": "dist",
   "routes": [
     {
       "src": "/api/(.*)",
@@ -7,7 +8,7 @@
     },
     {
       "src": "/article/([^/]+)",
-      "dest": "/article/[slug]?slug=$1"
+      "dest": "/article/[slug]/index.html"
     },
     {
       "src": "/(.*)",
