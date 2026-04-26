@@ -2,9 +2,23 @@ import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { fetchArticles } from '../lib/api';
 
-// Full article content stored locally
+// Full article content stored locally - keyed by article ID
 const articleContent = {
-  '5-minute-invoice-hack-get-paid-3x-faster': `
+  '69edb6aec5e1b0fc66b82028': `
+    <h2 style="color: #2563eb; font-size: 20px; font-weight: bold; margin-top: 24px; margin-bottom: 12px;">The Hidden Cost of Slow Invoicing</h2>
+    <p style="margin-bottom: 16px; line-height: 1.7;">Every day you wait to send an invoice, your chances of getting paid drop by 5%. After 30 days, you're essentially giving out interest-free loans to your clients.</p>
+    <p style="margin-bottom: 16px; line-height: 1.7;">This silent cash flow killer affects 67% of small businesses. Most owners don't realize that delayed invoicing is costing them thousands in lost revenue and strained client relationships.</p>
+    <h2 style="color: #2563eb; font-size: 20px; font-weight: bold; margin-top: 24px; margin-bottom: 12px;">The 5-Minute Solution</h2>
+    <p style="margin-bottom: 16px; line-height: 1.7;">ClawInvoice Pro automates your entire invoicing workflow: auto-generate invoices from completed work, send payment reminders without lifting a finger, track payment status in real-time, and accept online payments instantly.</p>
+    <p style="margin-bottom: 16px; line-height: 1.7;">The system integrates with your existing tools. Connect your calendar, project management, or CRM. When a job is marked complete, an invoice is automatically generated and sent within 5 minutes.</p>
+    <h2 style="color: #2563eb; font-size: 20px; font-weight: bold; margin-top: 24px; margin-bottom: 12px;">Real Results</h2>
+    <p style="margin-bottom: 16px; line-height: 1.7;">Businesses using automated invoicing get paid 3x faster on average. That means if you currently wait 45 days to get paid, you could be receiving payment in just 15 days.</p>
+    <p style="margin-bottom: 16px; line-height: 1.7;">One client, a marketing agency in Miami, reduced their average payment time from 52 days to 11 days. Their cash flow improved by $18,000 in the first month alone.</p>
+    <h2 style="color: #2563eb; font-size: 20px; font-weight: bold; margin-top: 24px; margin-bottom: 12px;">Start Today</h2>
+    <p style="margin-bottom: 16px; line-height: 1.7;">Don't let another invoice sit unsent. Automate your billing and watch your cash flow transform. With ClawInvoice Pro, you're not just saving time — you're accelerating your entire business.</p>
+    <p style="margin-bottom: 16px; line-height: 1.7;"><strong>Ready to get paid 3x faster?</strong> <a href="https://buy.stripe.com/28EaEXagS1Xo26S1gnffy0o" style="color: #2563eb;">Get ClawInvoice Pro today</a> and join thousands of businesses that have eliminated the invoice chase.</p>
+  `,
+  '69edb6d3c5e1b0fc66b8202a': `
     <h2 style="color: #2563eb; font-size: 20px; font-weight: bold; margin-top: 24px; margin-bottom: 12px;">The Hidden Cost of Slow Invoicing</h2>
     <p style="margin-bottom: 16px; line-height: 1.7;">Every day you wait to send an invoice, your chances of getting paid drop by 5%. After 30 days, you're essentially giving out interest-free loans to your clients.</p>
     <h2 style="color: #2563eb; font-size: 20px; font-weight: bold; margin-top: 24px; margin-bottom: 12px;">The 5-Minute Solution</h2>
