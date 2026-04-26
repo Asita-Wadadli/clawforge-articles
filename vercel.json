@@ -45,10 +45,5 @@
         }
       ]
     }
-  ],
-  "functions": {
-    "pages/api/articles/**/*.js": {
-      "maxDuration": 30
-    }
-  }
+  ]
 }
