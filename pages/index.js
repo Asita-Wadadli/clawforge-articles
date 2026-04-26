@@ -6,8 +6,7 @@ import { fetchArticles } from '../lib/api';
 export async function getStaticProps() {
   const articles = await fetchArticles();
   return {
-    props: { articles },
-    revalidate: 60 // Revalidate every minute
+    props: { articles }
   };
 }
 
