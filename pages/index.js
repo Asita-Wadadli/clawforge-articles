@@ -13,6 +13,7 @@ export default function Home({ articles }) {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedArticle, setExpandedArticle] = useState(null);
+  const [pdfLoading, setPdfLoading] = useState({});
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -43,6 +44,32 @@ export default function Home({ articles }) {
       if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
       setExpandedArticle(id);
+    }
+  };
+
+  const downloadPDF = async (articleId, slug) => {
+    setPdfLoading(prev => ({ ...prev, [articleId]: true }));
+    try {
+      const response = await fetch(`/api/articles/${articleId}/pdf`);
+      
+      if (!response.ok) {
+        throw new Error('Failed to generate PDF');
+      }
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${slug || 'article'}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error('PDF download error:', error);
+      alert('Failed to download PDF. Please try again later.');
+    } finally {
+      setPdfLoading(prev => ({ ...prev, [articleId]: false }));
     }
   };
 
@@ -194,16 +221,46 @@ export default function Home({ articles }) {
                           dangerouslySetInnerHTML={{ __html: article.content || article.excerpt }}
                         />
                         
-                        {/* Close Button */}
-                        <button
-                          onClick={() => toggleArticle(article.id)}
-                          className="mt-4 inline-flex items-center gap-1 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm font-medium"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                          </svg>
-                          Close
-                        </button>
+                        {/* Action Buttons */}
+                        <div className="flex flex-wrap gap-3 mt-4">
+                          {/* PDF Download Button */}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              downloadPDF(article.id, article.slug);
+                            }}
+                            disabled={pdfLoading[article.id]}
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm font-medium"
+                          >
+                            {pdfLoading[article.id] ? (
+                              <>
+                                <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+                                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                Generating...
+                              </>
+                            ) : (
+                              <>
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                Download PDF
+                              </>
+                            )}
+                          </button>
+                          
+                          {/* Close Button */}
+                          <button
+                            onClick={() => toggleArticle(article.id)}
+                            className="inline-flex items-center gap-1 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm font-medium"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                            </svg>
+                            Close
+                          </button>
+                        </div>
                       </div>
                     )}
 
