@@ -430,9 +430,9 @@ export default function Home({ articles }) {
 
                     {/* Expanded Content */}
                     {isExpanded && (
-                      <div className="px-4 sm:px-6 pb-4 sm:pb-6 border-t border-gray-100 dark:border-gray-700 bg-gray-50/80 dark:bg-gray-700/30">
+                      <div style={{ background: darkMode ? '#1f2937' : '#f3f4f6', padding: '20px', borderTop: '1px solid ' + (darkMode ? '#374151' : '#e5e7eb') }}>
                         <div 
-                          className="prose prose-sm sm:prose-base dark:prose-invert max-w-none py-4 prose-headings:font-bold prose-h2:text-blue-600 dark:prose-h2:text-blue-400 prose-a:text-blue-600 dark:prose-a:text-blue-400"
+                          style={{ lineHeight: 1.7 }}
                           dangerouslySetInnerHTML={{ __html: article.fullContent }}
                         />
                         
@@ -479,18 +479,31 @@ export default function Home({ articles }) {
                       </div>
                     )}
 
-                    {/* Read More Button (when collapsed) - SMALLER WITH COLOR */}
+                    {/* Read More Button (when collapsed) */}
                     {!isExpanded && (
-                      <div className="px-4 sm:px-6 pb-4">
+                      <div style={{ padding: '0 16px 16px' }}>
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
                             toggleArticle(article.id);
                           }}
-                          className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-full hover:from-blue-700 hover:to-purple-700 transition-all shadow-sm"
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                            padding: '8px 16px',
+                            fontSize: '13px',
+                            fontWeight: '600',
+                            color: 'white',
+                            background: 'linear-gradient(135deg, #2563eb, #9333ea)',
+                            border: 'none',
+                            borderRadius: '20px',
+                            cursor: 'pointer',
+                            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                          }}
                         >
-                          Read
-                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          Read Article
+                          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                           </svg>
                         </button>
