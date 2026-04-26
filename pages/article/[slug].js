@@ -86,7 +86,7 @@ export default function ArticlePage({ article, relatedArticles }) {
   const router = useRouter();
   const [darkMode, setDarkMode] = useState(false);
   const [pdfLoading, setPdfLoading] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -158,19 +158,15 @@ export default function ArticlePage({ article, relatedArticles }) {
   };
 
   if (router.isFallback) {
-    return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-        <p className="text-gray-500 dark:text-gray-400">Loading...</p>
-      </div>
-    );
+    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>;
   }
 
   if (!article) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Article Not Found</h1>
-          <a href="/" className="text-blue-600 hover:text-blue-700">← Back to Blog</a>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ textAlign: 'center' }}>
+          <h1>Article Not Found</h1>
+          <a href="/">← Back to Blog</a>
         </div>
       </div>
     );
@@ -189,85 +185,113 @@ export default function ArticlePage({ article, relatedArticles }) {
         <meta name="description" content={article.excerpt} />
       </Head>
 
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-        {/* Navigation */}
-        <nav className="border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-900 z-50 shadow-sm" style={{ position: 'fixed', width: '100%', top: 0 }}>
-          <div className="max-w-3xl mx-auto px-4" style={{ height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            {/* Logo */}
-            <a href="https://hemisphere-claw-agency.vercel.app" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
-              <div style={{ width: '32px', height: '32px', background: 'linear-gradient(135deg, #2563eb, #9333ea)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ color: 'white', fontSize: '14px', fontWeight: 'bold' }}>C</span>
-              </div>
-              <span style={{ fontWeight: 'bold', color: 'inherit' }}>ClawForge</span>
-            </a>
-            
-            {/* Desktop Nav */}
-            <div className="hidden sm:flex" style={{ alignItems: 'center', gap: '24px' }}>
-              <a href="/" style={{ fontSize: '14px', color: '#6b7280', textDecoration: 'none' }}>Blog</a>
-              <a href="https://hemisphere-claw-agency.vercel.app" style={{ fontSize: '14px', color: '#6b7280', textDecoration: 'none' }}>Home</a>
-              <button
-                onClick={toggleTheme}
-                style={{ padding: '8px', borderRadius: '8px', background: '#f3f4f6', border: 'none', cursor: 'pointer' }}
-                aria-label="Toggle theme"
-              >
-                {darkMode ? '☀️' : '🌙'}
-              </button>
-            </div>
+      <div style={{ minHeight: '100vh', background: darkMode ? '#111827' : '#f9fafb', color: darkMode ? '#fff' : '#111' }}>
+        {/* Navigation Bar */}
+        <nav style={{ 
+          position: 'fixed', 
+          top: 0, 
+          left: 0, 
+          right: 0, 
+          height: '56px', 
+          background: darkMode ? '#1f2937' : '#fff',
+          borderBottom: '1px solid ' + (darkMode ? '#374151' : '#e5e7eb'),
+          zIndex: 1000,
+          display: 'flex',
+          alignItems: 'center',
+          padding: '0 16px'
+        }}>
+          {/* Logo */}
+          <a href="https://hemisphere-claw-agency.vercel.app" style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '8px', 
+            textDecoration: 'none',
+            color: 'inherit'
+          }}>
+            <div style={{ 
+              width: '32px', 
+              height: '32px', 
+              background: 'linear-gradient(135deg, #2563eb, #9333ea)', 
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'white',
+              fontWeight: 'bold',
+              fontSize: '14px'
+            }}>C</div>
+            <span style={{ fontWeight: 'bold', fontSize: '16px' }}>ClawForge</span>
+          </a>
 
-            {/* Mobile Menu Button - ALWAYS VISIBLE ON MOBILE */}
-            <div className="sm:hidden" style={{ display: 'flex', alignItems: 'center' }}>
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                style={{ 
-                  padding: '10px', 
-                  borderRadius: '8px', 
-                  background: 'linear-gradient(135deg, #2563eb, #9333ea)', 
-                  color: 'white',
-                  border: 'none',
-                  cursor: 'pointer',
-                  fontSize: '18px'
-                }}
-                aria-label="Menu"
-              >
-                ☰
-              </button>
-            </div>
+          {/* Spacer */}
+          <div style={{ flex: 1 }}></div>
+
+          {/* Desktop Links */}
+          <div style={{ display: 'none', alignItems: 'center', gap: '24px' }} className="desktop-nav">
+            <a href="/" style={{ color: '#6b7280', textDecoration: 'none', fontSize: '14px' }}>Blog</a>
+            <a href="https://hemisphere-claw-agency.vercel.app" style={{ color: '#6b7280', textDecoration: 'none', fontSize: '14px' }}>Home</a>
+            <button onClick={toggleTheme} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '18px' }}>
+              {darkMode ? '☀️' : '🌙'}
+            </button>
           </div>
 
-          {/* Mobile Menu Dropdown */}
-          {mobileMenuOpen && (
-            <div className="sm:hidden" style={{ borderTop: '1px solid #e5e7eb', background: 'white', padding: '16px' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <a href="/" style={{ padding: '12px', color: '#374151', textDecoration: 'none', borderRadius: '6px' }} onClick={() => setMobileMenuOpen(false)}>Blog</a>
-                <a href="https://hemisphere-claw-agency.vercel.app" style={{ padding: '12px', color: '#374151', textDecoration: 'none', borderRadius: '6px' }} onClick={() => setMobileMenuOpen(false)}>Home</a>
-                <button
-                  onClick={() => { toggleTheme(); setMobileMenuOpen(false); }}
-                  style={{ padding: '12px', textAlign: 'left', background: 'none', border: 'none', cursor: 'pointer', color: '#374151' }}
-                >
-                  {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
-                </button>
-              </div>
-            </div>
-          )}
+          {/* Mobile Menu Button - ALWAYS VISIBLE */}
+          <button 
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{
+              width: '40px',
+              height: '40px',
+              background: 'linear-gradient(135deg, #2563eb, #9333ea)',
+              border: 'none',
+              borderRadius: '8px',
+              color: 'white',
+              fontSize: '20px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            ☰
+          </button>
         </nav>
+
+        {/* Mobile Menu Dropdown */}
+        {menuOpen && (
+          <div style={{
+            position: 'fixed',
+            top: '56px',
+            left: 0,
+            right: 0,
+            background: darkMode ? '#1f2937' : '#fff',
+            borderBottom: '1px solid ' + (darkMode ? '#374151' : '#e5e7eb'),
+            zIndex: 999,
+            padding: '16px'
+          }}>
+            <a href="/" style={{ display: 'block', padding: '12px', color: 'inherit', textDecoration: 'none' }} onClick={() => setMenuOpen(false)}>Blog</a>
+            <a href="https://hemisphere-claw-agency.vercel.app" style={{ display: 'block', padding: '12px', color: 'inherit', textDecoration: 'none' }} onClick={() => setMenuOpen(false)}>Home</a>
+            <button onClick={() => { toggleTheme(); setMenuOpen(false); }} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '12px', background: 'none', border: 'none', color: 'inherit', cursor: 'pointer' }}>
+              {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+            </button>
+          </div>
+        )}
 
         {/* Spacer for fixed nav */}
         <div style={{ height: '56px' }}></div>
 
-        {/* Article */}
-        <article className="max-w-3xl mx-auto px-4 py-8">
+        {/* Article Content */}
+        <article style={{ maxWidth: '768px', margin: '0 auto', padding: '24px 16px' }}>
           {/* Back Link */}
-          <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '14px', color: '#6b7280', textDecoration: 'none', marginBottom: '24px' }}>
+          <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', color: '#6b7280', textDecoration: 'none', marginBottom: '24px', fontSize: '14px' }}>
             ← Back to blog
           </a>
 
           {/* Header */}
           <header style={{ marginBottom: '32px' }}>
-            <h1 style={{ fontSize: '28px', fontWeight: 'bold', color: 'inherit', marginBottom: '16px', lineHeight: 1.3 }}>
+            <h1 style={{ fontSize: '28px', fontWeight: 'bold', marginBottom: '16px', lineHeight: 1.3 }}>
               {article.title}
             </h1>
-            
-            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px', fontSize: '14px', color: '#6b7280' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', fontSize: '14px', color: '#6b7280' }}>
               <span>{formattedDate}</span>
               <span>·</span>
               <span>{article.readTime} min read</span>
@@ -281,46 +305,56 @@ export default function ArticlePage({ article, relatedArticles }) {
           </header>
 
           {/* Content */}
-          <div style={{ background: 'white', borderRadius: '12px', padding: '24px', marginBottom: '24px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+          <div style={{ 
+            background: darkMode ? '#1f2937' : '#fff', 
+            borderRadius: '12px', 
+            padding: '24px',
+            marginBottom: '24px',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+          }}>
             <div 
               style={{ lineHeight: 1.7 }}
               dangerouslySetInnerHTML={{ __html: article.fullContent }}
             />
           </div>
 
-          {/* Action Buttons */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
-            <button
-              onClick={downloadPDF}
-              disabled={pdfLoading}
-              style={{ 
-                padding: '12px 24px', 
-                background: 'linear-gradient(135deg, #2563eb, #9333ea)', 
-                color: 'white', 
-                border: 'none', 
-                borderRadius: '8px', 
-                cursor: pdfLoading ? 'not-allowed' : 'pointer',
-                opacity: pdfLoading ? 0.7 : 1,
-                fontSize: '14px',
-                fontWeight: '600'
-              }}
-            >
-              {pdfLoading ? 'Opening...' : 'Download PDF'}
-            </button>
-          </div>
+          {/* Download Button */}
+          <button
+            onClick={downloadPDF}
+            disabled={pdfLoading}
+            style={{
+              padding: '12px 24px',
+              background: 'linear-gradient(135deg, #2563eb, #9333ea)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: pdfLoading ? 'not-allowed' : 'pointer',
+              opacity: pdfLoading ? 0.7 : 1,
+              fontSize: '14px',
+              fontWeight: '600'
+            }}
+          >
+            {pdfLoading ? 'Opening...' : 'Download PDF'}
+          </button>
         </article>
 
         {/* Related Articles */}
         {relatedArticles.length > 0 && (
-          <section style={{ borderTop: '1px solid #e5e7eb', background: 'white', marginTop: '48px' }}>
-            <div className="max-w-3xl mx-auto px-4 py-8">
+          <section style={{ borderTop: '1px solid ' + (darkMode ? '#374151' : '#e5e7eb'), background: darkMode ? '#1f2937' : '#fff', marginTop: '48px' }}>
+            <div style={{ maxWidth: '768px', margin: '0 auto', padding: '32px 16px' }}>
               <h2 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '24px' }}>More articles</h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 {relatedArticles.map(related => (
                   <a 
                     key={related.id}
                     href={`/article/${related.slug}/`}
-                    style={{ padding: '16px', background: '#f9fafb', borderRadius: '8px', textDecoration: 'none', color: 'inherit' }}
+                    style={{ 
+                      padding: '16px', 
+                      background: darkMode ? '#111827' : '#f9fafb', 
+                      borderRadius: '8px', 
+                      textDecoration: 'none', 
+                      color: 'inherit' 
+                    }}
                   >
                     <h3 style={{ fontWeight: '600', marginBottom: '4px' }}>{related.title}</h3>
                     <p style={{ fontSize: '14px', color: '#6b7280' }}>{related.excerpt}</p>
@@ -332,17 +366,24 @@ export default function ArticlePage({ article, relatedArticles }) {
         )}
 
         {/* Footer */}
-        <footer style={{ borderTop: '1px solid #e5e7eb', background: 'white', marginTop: '48px' }}>
-          <div className="max-w-3xl mx-auto px-4 py-8">
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', fontSize: '14px', color: '#6b7280' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <div style={{ width: '24px', height: '24px', background: 'linear-gradient(135deg, #2563eb, #9333ea)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ color: 'white', fontSize: '12px', fontWeight: 'bold' }}>C</span>
-                </div>
-                <span style={{ fontWeight: '600', color: 'inherit' }}>ClawForge</span>
-              </div>
-              <p>© {new Date().getFullYear()} ClawForge Systems</p>
+        <footer style={{ borderTop: '1px solid ' + (darkMode ? '#374151' : '#e5e7eb'), background: darkMode ? '#1f2937' : '#fff', marginTop: '48px' }}>
+          <div style={{ maxWidth: '768px', margin: '0 auto', padding: '32px 16px', textAlign: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '16px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                background: 'linear-gradient(135deg, #2563eb, #9333ea)', 
+                borderRadius: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontWeight: 'bold',
+                fontSize: '12px'
+              }}>C</div>
+              <span style={{ fontWeight: '600' }}>ClawForge</span>
             </div>
+            <p style={{ fontSize: '14px', color: '#6b7280' }}>© {new Date().getFullYear()} ClawForge Systems</p>
           </div>
         </footer>
       </div>
