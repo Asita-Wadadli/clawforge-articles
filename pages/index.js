@@ -328,10 +328,16 @@ export default function Home({ articles }) {
                       <div style={{ 
                         padding: '20px', 
                         background: darkMode ? '#111827' : '#f3f4f6',
-                        borderTop: '1px solid ' + (darkMode ? '#374151' : '#e5e7eb')
+                        borderTop: '1px solid ' + (darkMode ? '#374151' : '#e5e7eb'),
+                        maxHeight: 'none',
+                        overflow: 'visible'
                       }}>
                         <div 
-                          style={{ color: darkMode ? '#fff' : '#1f2937', lineHeight: 1.7 }}
+                          style={{ 
+                            color: darkMode ? '#fff' : '#1f2937', 
+                            lineHeight: 1.7,
+                            overflow: 'visible'
+                          }}
                           dangerouslySetInnerHTML={{ __html: article.fullContent }}
                         />
                         
