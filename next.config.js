@@ -2,6 +2,7 @@
 const nextConfig = {
   output: 'export',
   distDir: 'dist',
+  generateBuildId: async () => 'build-' + Date.now(),
   images: {
     unoptimized: true,
   },
