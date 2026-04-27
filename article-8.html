@@ -5,58 +5,125 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>From Chaos to Cash Flow | ClawForge</title>
     <meta name="description" content="How one entrepreneur transformed their chaotic business operations into a streamlined cash flow machine.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f9fafb; color: #111; line-height: 1.6; transition: background 0.3s, color 0.3s; }
+        body.dark { background: #111827; color: #fff; }
+        nav { position: sticky; top: 0; height: 56px; background: #fff; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; padding: 0 16px; z-index: 1000; transition: background 0.3s, border-color 0.3s; }
+        body.dark nav { background: #1f2937; border-color: #374151; }
+        nav a { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+        .logo { width: 32px; height: 32px; background: linear-gradient(135deg, #2563eb, #9333ea); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px; }
+        .theme-toggle { margin-left: auto; padding: 8px 16px; background: #f3f4f6; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; transition: background 0.3s; }
+        body.dark .theme-toggle { background: #374151; }
+        main { max-width: 768px; margin: 0 auto; padding: 32px 16px; }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: #2563eb; text-decoration: none; margin-bottom: 24px; font-weight: 500; }
+        .meta { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #6b7280; margin-bottom: 16px; }
+        body.dark .meta { color: #9ca3af; }
+        .meta .cat { color: #2563eb; }
+        h1 { font-size: 32px; font-weight: bold; margin-bottom: 24px; line-height: 1.3; }
+        h2 { font-size: 24px; font-weight: 600; margin-top: 32px; margin-bottom: 16px; color: #2563eb; }
+        p { margin-bottom: 16px; font-size: 16px; }
+        strong { font-weight: 600; }
+        .actions { display: flex; gap: 12px; margin-top: 48px; padding-top: 32px; border-top: 1px solid #e5e7eb; }
+        body.dark .actions { border-color: #374151; }
+        .btn { padding: 12px 24px; background: linear-gradient(135deg, #2563eb, #9333ea); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-secondary { background: #f3f4f6; color: #111; }
+        body.dark .btn-secondary { background: #374151; color: #fff; }
+        footer { border-top: 1px solid #e5e7eb; background: #fff; margin-top: 64px; padding: 32px 16px; text-align: center; color: #6b7280; transition: background 0.3s, border-color 0.3s; }
+        body.dark footer { background: #1f2937; border-color: #374151; }
+    </style>
 </head>
 <body>
+    <nav>
+        <a href="https://hemisphere-claw-agency.vercel.app">
+            <div class="logo">C</div>
+            <span style="font-weight: bold; font-size: 16px;">ClawForge</span>
+        </a>
+        <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+    </nav>
 
-<h1>From Chaos to Cash Flow: A Small Business Automation Success Story</h1>
+    <main>
+        <a href="index.html" class="back-link">← Back to Blog</a>
+        
+        <div class="meta">
+            <span>Apr 26, 2026</span>
+            <span>·</span>
+            <span>5 min read</span>
+            <span>·</span>
+            <span class="cat">ClawForge Suite</span>
+        </div>
 
-<h2>The Breaking Point</h2>
+        <h1>From Chaos to Cash Flow: A Small Business Automation Success Story</h1>
 
-<p>It was 11 PM on a Tuesday. I was still at my desk, surrounded by coffee cups, chasing yet another late payment, and wondering how I'd ended up here.</p>
+        <h2>The Breaking Point</h2>
 
-<p>My business was "successful" on paper. Revenue was growing. Clients were happy. But I was drowning in admin work, working 70-hour weeks, and barely making ends meet because of cash flow problems.</p>
+        <p>It was 11 PM on a Tuesday. I was still at my desk, surrounded by coffee cups, chasing yet another late payment, and wondering how I'd ended up here.</p>
 
-<h2>The Chaos</h2>
+        <p>My business was "successful" on paper. Revenue was growing. Clients were happy. But I was drowning in admin work, working 70-hour weeks, and barely making ends meet because of cash flow problems.</p>
 
-<p>My daily reality looked like this:<br>
-• 20+ unanswered emails<br>
-• 5 invoices overdue by 30+ days<br>
-• 3 quote requests I hadn't responded to yet<br>
-• A calendar full of appointments I'd forgotten to confirm</p>
+        <h2>The Chaos</h2>
 
-<p>I was spending 60% of my time on admin and only 40% on actual revenue-generating work.</p>
+        <p>My daily reality looked like this:<br>
+        • 20+ unanswered emails<br>
+        • 5 invoices overdue by 30+ days<br>
+        • 3 quote requests I hadn't responded to yet<br>
+        • A calendar full of appointments I'd forgotten to confirm</p>
 
-<h2>The Transformation</h2>
+        <p>I was spending 60% of my time on admin and only 40% on actual revenue-generating work.</p>
 
-<p>I discovered the <strong>ClawForge Business Suite</strong> and committed to a 30-day automation overhaul.</p>
+        <h2>The Transformation</h2>
 
-<p><strong>Week 1:</strong> Implemented ClawInvoice Pro. Invoices went from taking 2 hours to 10 minutes.</p>
+        <p>I discovered the <strong>ClawForge Business Suite</strong> and committed to a 30-day automation overhaul.</p>
 
-<p><strong>Week 2:</strong> Set up Instant Quote Engine Pro. Quotes now generate in 60 seconds.</p>
+        <p><strong>Week 1:</strong> Implemented ClawInvoice Pro. Invoices went from taking 2 hours to 10 minutes.</p>
 
-<p><strong>Week 3:</strong> Deployed AI Avatar Pack for customer communication.</p>
+        <p><strong>Week 2:</strong> Set up Instant Quote Engine Pro. Quotes now generate in 60 seconds.</p>
 
-<p><strong>Week 4:</strong> Connected everything into a seamless workflow.</p>
+        <p><strong>Week 3:</strong> Deployed AI Avatar Pack for customer communication.</p>
 
-<h2>The Results After 90 Days</h2>
+        <p><strong>Week 4:</strong> Connected everything into a seamless workflow.</p>
 
-<p>• <strong>Admin time:</strong> Dropped from 40 hours/week to 8 hours/week<br>
-• <strong>Average payment time:</strong> Went from 45 days to 12 days<br>
-• <strong>Quote conversion:</strong> Doubled from 20% to 40%<br>
-• <strong>Weekly hours:</strong> Cut from 70 to 45<br>
-• <strong>Monthly revenue:</strong> Increased by $15,000</p>
+        <h2>The Results After 90 Days</h2>
 
-<h2>The Cash Flow Machine</h2>
+        <p>• <strong>Admin time:</strong> Dropped from 40 hours/week to 8 hours/week<br>
+        • <strong>Average payment time:</strong> Went from 45 days to 12 days<br>
+        • <strong>Quote conversion:</strong> Doubled from 20% to 40%<br>
+        • <strong>Weekly hours:</strong> Cut from 70 to 45<br>
+        • <strong>Monthly revenue:</strong> Increased by $15,000</p>
 
-<p>Today, my business runs like a well-oiled machine. Invoices go out automatically. Payments come in faster. Quotes convert higher. And I actually have time to think strategically about growth.</p>
+        <h2>The Cash Flow Machine</h2>
 
-<p>But the best part? I sleep through the night. I take weekends off. I spend time with my family. The business serves me now—not the other way around.</p>
+        <p>Today, my business runs like a well-oiled machine. Invoices go out automatically. Payments come in faster. Quotes convert higher. And I actually have time to think strategically about growth.</p>
 
-<h2>Your Turn</h2>
+        <p>But the best part? I sleep through the night. I take weekends off. I spend time with my family. The business serves me now—not the other way around.</p>
 
-<p>If you're stuck in chaos, there's a way out. The tools exist. The roadmap is clear. You just need to take the first step.</p>
+        <h2>Your Turn</h2>
 
-<p><strong>Get the ClawForge Business Suite today and start your transformation from chaos to cash flow.</strong></p>
+        <p>If you're stuck in chaos, there's a way out. The tools exist. The roadmap is clear. You just need to take the first step.</p>
 
+        <p><strong>Get the ClawForge Business Suite today and start your transformation from chaos to cash flow.</strong></p>
+
+        <div class="actions">
+            <button class="btn" onclick="window.print()">📄 Download PDF</button>
+            <a href="index.html" class="btn btn-secondary">← Back to Blog</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 ClawForge Systems</p>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const btn = document.querySelector('.theme-toggle');
+            btn.textContent = document.body.classList.contains('dark') ? '🌙' : '☀️';
+            localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark');
+            document.querySelector('.theme-toggle').textContent = '🌙';
+        }
+    </script>
 </body>
 </html>
