@@ -1,5 +1,5 @@
 node_modules/
-dist/
+# dist/ - temporarily disabled for static deployment
 .next/
 *.log
 .env
