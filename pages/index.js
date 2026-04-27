@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -43,6 +42,60 @@ export default function Home() {
       excerpt: "Every hour you spend creating quotes is an hour you're not billing clients. Discover how AI can generate professional quotes in 60 seconds and win more deals.",
       readTime: 4,
       category: "Instant Quote Engine Pro",
+      date: "Apr 26, 2026"
+    },
+    {
+      id: '3',
+      slug: 'automated-80-percent-admin',
+      title: "How I Automated 80% of My Admin Work in 30 Days (Without Hiring)",
+      excerpt: "Most business owners spend 40% of their time on admin tasks. Learn the 30-day transformation that reclaims 20+ hours per week through strategic automation.",
+      readTime: 5,
+      category: "ClawForge Suite",
+      date: "Apr 26, 2026"
+    },
+    {
+      id: '4',
+      slug: 'ai-chatbots-dead',
+      title: "AI Chatbots Are Dead—Here's What's Replacing Them in 2026",
+      excerpt: "Traditional chatbots failed because they were rigid and frustrating. Discover how AI avatars are revolutionizing customer service with natural conversations and emotional intelligence.",
+      readTime: 4,
+      category: "AI Avatar Pack",
+      date: "Apr 26, 2026"
+    },
+    {
+      id: '5',
+      slug: '47-dollar-tool-eliminated-2000-va',
+      title: "The $47 Tool That Eliminated My $2,000/Month Virtual Assistant",
+      excerpt: "I was paying $24,000/year for a VA until I built an automation system that handles 80% of the work. Here's how you can do the same.",
+      readTime: 4,
+      category: "ClawForge Suite",
+      date: "Apr 26, 2026"
+    },
+    {
+      id: '6',
+      slug: '7-ai-automation-tools',
+      title: "7 AI Automation Tools Every Small Business Needs in 2026",
+      excerpt: "Small businesses using AI automation grow 3x faster. Discover the 7 essential tools that can save you 20+ hours per week.",
+      readTime: 5,
+      category: "ClawForge Suite",
+      date: "Apr 26, 2026"
+    },
+    {
+      id: '7',
+      slug: 'automated-payment-follow-up',
+      title: "Stop Chasing Payments: The Automated Follow-Up System That Actually Works",
+      excerpt: "Chasing invoices is awkward and kills cash flow. Learn how automated follow-ups recover 40% more revenue while saving 10+ hours per week.",
+      readTime: 4,
+      category: "ClawInvoice Pro",
+      date: "Apr 26, 2026"
+    },
+    {
+      id: '8',
+      slug: 'from-chaos-to-cash-flow',
+      title: "From Chaos to Cash Flow: A Small Business Automation Success Story",
+      excerpt: "How one entrepreneur transformed their chaotic business operations into a streamlined cash flow machine using the ClawForge Business Suite.",
+      readTime: 5,
+      category: "ClawForge Suite",
       date: "Apr 26, 2026"
     }
   ];
